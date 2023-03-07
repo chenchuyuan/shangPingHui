@@ -58,6 +58,7 @@ import { validUsername } from '@/utils/validate'
 export default {
   name: 'Login',
   data() {
+    // 表单验证
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -65,6 +66,7 @@ export default {
         callback()
       }
     }
+    // 表单验证
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'))
@@ -105,10 +107,15 @@ export default {
         this.$refs.password.focus()
       })
     },
+    // 登录方法
     handleLogin() {
+      // 表单验证
       this.$refs.loginForm.validate(valid => {
+        // 验证成功
         if (valid) {
+          // 按钮loading效果
           this.loading = true
+          // 派发一个action:user/login,带着用户名和密码的载荷
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
@@ -180,7 +187,9 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  // background-color: $bg;
+  background:url(~@/assets/cat.webp);
+  background-size: 100% 100%;
   overflow: hidden;
 
   .login-form {

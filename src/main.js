@@ -35,6 +35,18 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
+// 挂载到vue原型上，这样每个实例都能使用
+// 实例的原型的原型指向vue.prototype
+import Api from '@/api/index'
+Vue.prototype.$Api = Api
+
+// 注册公共组件
+import CatogorySelect from '@/components/CategorySelect'
+Vue.component(CatogorySelect.name, CatogorySelect)
+
+import HintButton from '@/components/HintButton'
+Vue.component(HintButton.name, HintButton)
+
 new Vue({
   el: '#app',
   router,

@@ -47,3 +47,8 @@
 .el-range-separator {
   box-sizing: content-box;
 }
+
+// 卡片底部样式
+.el-card__header{
+  border-bottom: none;
+}

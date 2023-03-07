@@ -36,7 +36,21 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    // 配置代理跨域
+    proxy: {
+      '/dev-api': { // 这里要与配置（env.development文件中）的开发地址一致
+        target: 'http://39.98.123.211:8170',
+        pathRewrite: { '^/dev-api': '' } //  //重写访问地址，在请求时可以省略target的地址，直接以dev-api开头
+      },
+      '/api': {
+        target: 'http://39.98.123.211:8510', // 设置要代理访问的接口
+        pathRewrite: {
+          '^/api': '' // 重写访问地址，在请求时可以省略target的地址，直接以/api开头
+        }
+      }
+    },
+    // 开启mock数据
+    after: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
